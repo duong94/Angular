@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-coders-tokyo"
+    }
+  },
+  "defaultProject": "ng-coders-tokyo",
+  "cli": {
+    "analytics": false
+  }
 }
