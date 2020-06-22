@@ -4,8 +4,15 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   //templateUrl: './app.component.html',
   template: `
-    <h1 [class.with-border]="withBorder">{{title}}</h1>
-    <img [src]="imageSrc">
+    <h1 
+      [class.with-border]="withBorder"
+      [style.color]="textColor"
+      (mouseover)="onTextMouseOver()"
+      (mouseout)="onTextMouseOut()"
+    >
+      {{title}}
+    </h1>
+    <button (click) = "onButtonClick($event)">{{withBorder ? 'Hide' : 'Show'}} Border</button>
     `,
   styleUrls: ['./app.component.css']
   
@@ -15,8 +22,17 @@ export class AppComponent {
   imageSrc = 'https://picsum.photos/id/237/200';
 
   textColor = 'tomato';
-  backgroundColor = 'black';
-  styleObj = {color: this.textColor, background: this.backgroundColor};
+  withBorder = true;
 
-  withBorder = false;
+  onButtonClick(){
+    this.withBorder = !this.withBorder;
+  }
+
+  onTextMouseOver(){
+    this.textColor = 'dodgerblue';
+  }
+
+  onTextMouseOut(){
+    this.textColor = 'tomato';
+  }
 }
