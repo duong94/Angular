@@ -1,38 +1,59 @@
-import { Component } from '@angular/core';
+import { 
+  Component,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterContentChecked,
+  SimpleChange,
+  SimpleChanges, 
+} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  //templateUrl: './app.component.html',
   template: `
-    <h1 
-      [class.with-border]="withBorder"
-      [style.color]="textColor"
-      (mouseover)="onTextMouseOver()"
-      (mouseout)="onTextMouseOut()"
-    >
-      {{title}}
-    </h1>
-    <button (click) = "onButtonClick($event)">{{withBorder ? 'Hide' : 'Show'}} Border</button>
+    <h1 [class.with-border]="withBorder" [style.color]="textColor">{{title}}</h1>
+    <button (click) = "onButtonClick()">{{withBorder ? 'Hide' : 'Show'}} Border</button>
+    <app-hello [text]="title"></app-hello>
     `,
   styleUrls: ['./app.component.css']
   
 })
-export class AppComponent {
+export class AppComponent 
+  implements OnInit, OnChanges, OnDestroy, AfterViewChecked, AfterContentInit, AfterViewInit, AfterContentChecked { 
   title = 'Coders.Tokyo Updated';
   imageSrc = 'https://picsum.photos/id/237/200';
 
   textColor = 'tomato';
   withBorder = true;
 
+  ngOnInit(): void{
+    console.log('Parent OnInit ran');
+  }
+  ngOnChanges(changes: SimpleChanges): void{
+    console.log('Parent OnChanges ran', { changes });
+  }
+  ngOnDestroy(): void{
+    console.log('Parent OnDestroy ran');
+  }
+  ngAfterViewInit(): void{
+    console.log('Parent AfterViewInit ran');
+  }
+  ngAfterContentInit(): void{
+    console.log('Parent AfterContentInit ran');
+  }
+  ngAfterViewChecked(): void{
+    console.log('Parent AfterViewChecked ran');
+  }
+  ngAfterContentChecked(): void{
+    console.log('Parent AfterContentChecked ran');
+  }
   onButtonClick(){
     this.withBorder = !this.withBorder;
+    this.title = 'Change';
   }
 
-  onTextMouseOver(){
-    this.textColor = 'dodgerblue';
-  }
-
-  onTextMouseOut(){
-    this.textColor = 'tomato';
-  }
+  
 }
