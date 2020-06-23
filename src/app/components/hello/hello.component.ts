@@ -8,40 +8,51 @@ import {
     AfterViewChecked,
     AfterContentChecked,
     Input,
+    Output,
+    EventEmitter,
     SimpleChanges, 
   } from '@angular/core';
+import { title } from 'process';
   
   @Component({
     selector: 'app-hello',
     template: `
       <h2>Hello from hello component</h2>
       <p>{{ text }} from parent</p>
+
+      <button (click)="onButtonClicked()">Button in Hello</button>
       `,
   })
   export class HelloComponent 
     implements OnInit, OnChanges, OnDestroy, AfterViewChecked, AfterContentInit, AfterViewInit, AfterContentChecked { 
-    @Input() text:String;
+    @Input() text:string;
+    @Output() buttonClicked: EventEmitter<string> = new EventEmitter<string>();
+
+    onButtonClicked(){
+        this.text = 'Changed from Hello Component';
+        this.buttonClicked.emit(this.text);
+    }
 
     ngOnInit(): void{
       console.log('Child OnInit ran');
     }
     ngOnChanges(Changes: SimpleChanges): void{
-      console.log('Child OnChanges ran', { Changes });
+      //console.log('Child OnChanges ran', { Changes });
     }
     ngOnDestroy(): void{
-      console.log('Child OnDestroy ran');
+      //console.log('Child OnDestroy ran');
     }
     ngAfterViewInit(): void{
-      console.log('Child fterViewInit ran');
+      //console.log('Child fterViewInit ran');
     }
     ngAfterContentInit(): void{
-      console.log('Child AfterContentInit ran');
+      //console.log('Child AfterContentInit ran');
     }
     ngAfterViewChecked(): void{
-      console.log('Child AfterViewChecked ran');
+      //console.log('Child AfterViewChecked ran');
     }
     ngAfterContentChecked(): void{
-      console.log('Child AfterContentChecked ran');
+      //console.log('Child AfterContentChecked ran');
     }
   
     
