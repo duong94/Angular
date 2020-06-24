@@ -13,6 +13,7 @@ import {
     SimpleChanges, 
   } from '@angular/core';
 import { title } from 'process';
+import  { DataService } from 'src/app/services/data.service';
   
   @Component({
     selector: 'app-hello',
@@ -28,6 +29,9 @@ import { title } from 'process';
     @Input() text:string;
     @Output() buttonClicked: EventEmitter<string> = new EventEmitter<string>();
 
+    constructor(private _dataService: DataService) {
+    }
+
     onButtonClicked(){
         this.text = 'Changed from Hello Component';
         this.buttonClicked.emit(this.text);
@@ -35,6 +39,7 @@ import { title } from 'process';
 
     ngOnInit(): void{
       console.log('Child OnInit ran');
+      this._dataService.setTextFromHello(this.text);
     }
     ngOnChanges(Changes: SimpleChanges): void{
       //console.log('Child OnChanges ran', { Changes });
