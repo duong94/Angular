@@ -13,7 +13,7 @@ export class HiComponent implements OnInit {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this.textFromHello = this._dataService.textFromHello; 
+    this._dataService.textFromHello$.subscribe(text => this.textFromHello = text);
   }
 
 }

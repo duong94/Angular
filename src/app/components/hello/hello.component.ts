@@ -35,6 +35,7 @@ import  { DataService } from 'src/app/services/data.service';
     onButtonClicked(){
         this.text = 'Changed from Hello Component';
         this.buttonClicked.emit(this.text);
+        this._dataService.setTextFromHello(this.text);
     }
 
     ngOnInit(): void{
